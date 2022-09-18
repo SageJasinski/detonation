@@ -21,5 +21,10 @@ public class FlagCounter : MonoBehaviour{
                     Count.text = Max.ToString();
                 }
             }
+
+            if(Input.GetKeyDown(KeyCode.Space) && Max < 5){
+                Max++;
+                Count.text = Max.ToString();
+            }
         }
 }

@@ -12,8 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Flag;
     public Transform FlagPos;
     public Transform player;
+    private GameObject colid;
 
     public int Maxflags = 0;
+
+    bool trigger = false;
 
     void Start(){
 
@@ -57,12 +60,27 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log(Maxflags);
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Space) && trigger == true){
+            Maxflags--;
+            Destroy(colid);
+        }
     }
 
+    //creates collision instence with an obj
     private void OnTriggerEnter2D(Collider2D collision){
-        // Debug.Log("Collision");
+        //collision with Flag tag obj
+
         if(collision.gameObject.tag == "Flag"){
-            Debug.Log("Flag");
+            trigger = true;
+
+            colid = (collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision){
+        if(collision.gameObject.tag == "Flag"){
+            trigger = false;
         }
     }
 }
