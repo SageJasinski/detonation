@@ -8,6 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform movePoint;
 
     public LayerMask whatStopsmovement;
+
+    public GameObject Flag;
+    public Transform FlagPos;
+    public Transform player;
+
+    public int Maxflags = 0;
+
     void Start(){
 
         movePoint.parent = null;
@@ -17,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
+            //Player movement on grid system
             if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
 
             //gets input from user and decieds if its verticle or horizontile
@@ -35,5 +43,27 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        //This lets the player place a flag on a specific squar
+        if(Maxflags <= 4){
+            if(Input.GetKeyDown (KeyCode.E)){
+                Instantiate(Flag, player.position += new Vector3(1,0), Quaternion.identity);
+                Maxflags++;
+                Debug.Log(Maxflags);
+            }
+            if(Input.GetKeyDown(KeyCode.Q)){
+                Instantiate(Flag, player.position += new Vector3(-1,0), Quaternion.identity);
+                Maxflags++;
+                Debug.Log(Maxflags);
+            }
+        }
+
+        // if(Input.GetKeyDown(KeyCode.Space)){
+        //     if(player.transform.position == FlagPos.transform.position){
+        //         Debug.Log("Pass");
+        //         Maxflags--;
+        //         Destroy(Flag);
+        //     }
+        // }
     }
 }
