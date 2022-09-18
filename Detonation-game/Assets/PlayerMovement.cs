@@ -47,23 +47,20 @@ public class PlayerMovement : MonoBehaviour
         //This lets the player place a flag on a specific squar
         if(Maxflags <= 4){
             if(Input.GetKeyDown (KeyCode.E)){
-                Instantiate(Flag, player.position += new Vector3(1,0), Quaternion.identity);
+                Instantiate(Flag, transform.position + new Vector3(+1,0), Quaternion.identity);
                 Maxflags++;
                 Debug.Log(Maxflags);
             }
             if(Input.GetKeyDown(KeyCode.Q)){
-                Instantiate(Flag, player.position += new Vector3(-1,0), Quaternion.identity);
+                Instantiate(Flag, transform.position + new Vector3(-1,0), Quaternion.identity);
                 Maxflags++;
                 Debug.Log(Maxflags);
             }
         }
+    }
 
-        // if(Input.GetKeyDown(KeyCode.Space)){
-        //     if(player.transform.position == FlagPos.transform.position){
-        //         Debug.Log("Pass");
-        //         Maxflags--;
-        //         Destroy(Flag);
-        //     }
-        // }
+    private void OnTriggerEnter2D(Collider2D other){
+        Debug.Log("Collision");
+        
     }
 }
